@@ -30,8 +30,9 @@ class BaseSEOAgent(BaseAgent, ABC):
             agent_type=agent_type,
             config=config or {},
         )
-        self.settings = get_settings()
-        self.logger = logging.getLogger(f"{__name__}.{self.__class__.__name__}")
+        # Set settings and logger as object attributes (not Pydantic fields)
+        object.__setattr__(self, 'settings', get_settings())
+        object.__setattr__(self, 'logger', logging.getLogger(f"{__name__}.{self.__class__.__name__}"))
         
     async def execute_task(self, task: SEOTask) -> ExecutionResult:
         """Execute a task with proper error handling and logging."""

@@ -33,11 +33,11 @@ class SEOCollectorAgent(BaseSEOAgent, SEOTaskMixin):
         )
         
         # Initialize Data for SEO client
-        self.client: Optional[DataForSEOClient] = None
+        object.__setattr__(self, 'client', None)
         
         # Cache for recent results to avoid duplicate API calls
-        self._cache: Dict[str, Any] = {}
-        self._cache_ttl = self.settings.cache_ttl
+        object.__setattr__(self, '_cache', {})
+        object.__setattr__(self, '_cache_ttl', self.settings.cache_ttl)
         
     async def _get_client(self) -> DataForSEOClient:
         """Get or create Data for SEO client."""

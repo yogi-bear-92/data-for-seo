@@ -37,15 +37,15 @@ class SEOProcessorAgent(BaseSEOAgent, SEOTaskMixin):
         )
         
         # Initialize vector store for knowledge management
-        self.vector_store: Optional[SEOVectorStore] = None
+        object.__setattr__(self, 'vector_store', None)
         
         # Processing statistics
-        self.processing_stats = {
+        object.__setattr__(self, 'processing_stats', {
             "tasks_processed": 0,
             "patterns_identified": 0,
             "recommendations_generated": 0,
             "knowledge_entries_created": 0,
-        }
+        })
         
     async def _get_vector_store(self) -> SEOVectorStore:
         """Get or create vector store instance."""
