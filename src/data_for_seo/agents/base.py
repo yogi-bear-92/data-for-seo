@@ -175,11 +175,14 @@ class SEOTaskMixin:
     
     @staticmethod
     def validate_url(url: str) -> bool:
-        """Validate URL format."""
+        """Validate URL format for HTTP/HTTPS only."""
         try:
             from urllib.parse import urlparse
             result = urlparse(url)
-            return all([result.scheme, result.netloc])
+            return all([
+                result.scheme in ("http", "https"),
+                result.netloc
+            ])
         except Exception:
             return False
     
@@ -197,6 +200,8 @@ class SEOTaskMixin:
         """Extract domain from URL."""
         try:
             from urllib.parse import urlparse
-            return urlparse(url).netloc.lower()
+            result = urlparse(url)
+            domain = result.netloc.lower()
+            return domain if domain else None
         except Exception:
             return None

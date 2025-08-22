@@ -206,7 +206,7 @@ class BaseAgent(BaseModel):
     model_config = ConfigDict(
         str_strip_whitespace=True,
         validate_assignment=True,
-        extra="forbid",
+        extra="allow",  # Allow extra attributes like settings
     )
     
     id: UUID = Field(default_factory=uuid4, description="Agent identifier")
